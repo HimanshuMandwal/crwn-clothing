@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter><React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode></BrowserRouter>
+  ,
   document.getElementById('root')
 );
+
+//we have put the whole of the app inside the BrowserRouter so that Our App gets All the functionality of the react-router-dom
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
