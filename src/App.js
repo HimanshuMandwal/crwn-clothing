@@ -15,6 +15,7 @@ function hats() {
   )
 }
 
+//props drelling is handled via using redux in our web app
 
 class App extends React.Component {
   constructor() {

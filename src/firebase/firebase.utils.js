@@ -24,7 +24,8 @@ provider.setCustomParameters({prompt: 'select_account'});
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (userAuth, additionalData) => {  //this to create the document in the firebase DB of any signed in user or newly
+  // created user even though using the authentication we have signed the user but its data is not stored in our user doc at the firestore
   if(!userAuth) {
     return;
   }
