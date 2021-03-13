@@ -3,6 +3,7 @@ import { Link}  from 'react-router-dom';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/headerIcon/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
+import { connect } from 'react-redux' ; //Connect is a heigher order component
 
 const Header = ({currentUser}) => (
    <div className ='header'>
@@ -23,4 +24,8 @@ const Header = ({currentUser}) => (
    </div>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({ //after making this we automaticaly have currentUser in props of the function
+    currentUser: state.user.currentUser, //this state here is top level reducer state and that is mapped to the prop currentUser
+})
+
+export default connect(mapStateToProps)(Header); //creating a heigher order component using connect function
