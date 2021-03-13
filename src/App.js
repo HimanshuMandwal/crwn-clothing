@@ -1,7 +1,7 @@
 import React from 'react';
 import HomePage from './pages/homepage/homepage.component'
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch ,Redirect } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -53,14 +53,18 @@ class App extends React.Component {
         <Route exact path='/' component={HomePage}/>
         <Route  path='/shop' component={ShopPage}/>
         <Route  path='/shop/hats' component= {hats}/>
-        <Route path='/sign-in' component = {SignInAndSignUpPage}/>
+        <Route  exact path='/sign-in' render={()=> this.props.currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage/>) }/>
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({user}) =>({
+  currentUser: user.currentUser,
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)), //whatever object you  are passing me is going to be the action object that i(redux) am passing this action to all the reducers
 })
-export default connect(null, mapDispatchToProps)(App); //as null as there is no any props need here in the App component so we pass null here
+export default connect(mapStateToProps, mapDispatchToProps)(App); //as null as there is no any props need here in the App component so we pass null here
