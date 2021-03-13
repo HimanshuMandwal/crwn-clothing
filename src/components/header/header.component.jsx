@@ -4,8 +4,10 @@ import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/headerIcon/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux' ; //Connect is a heigher order component
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser ,hidden}) => (
    <div className ='header'>
        <Link className='logo-container' to="/">
             <Logo className="logo"></Logo>
@@ -20,12 +22,16 @@ const Header = ({currentUser}) => (
             {currentUser?
             <div className="option" onClick = {()=> auth.signOut()}>SIGN OUT</div>
             :<Link  className='option' to='/sign-in'>SIGNIN</Link>}
+            <CartIcon/>
         </div>
+
+        { hidden ? null:<CartDropdown/>}
    </div>
 );
 
-const mapStateToProps = (state) => ({ //after making this we automaticaly have currentUser in props of the function
-    currentUser: state.user.currentUser, //this state here is top level reducer state and that is mapped to the prop currentUser
+const mapStateToProps = ({user:{currentUser}, cart:{hidden}}) => ({ //after making this we automaticaly have currentUser in props of the function
+    currentUser,//this state here is top level reducer state and that is mapped to the prop currentUser
+    hidden
 })
 
 export default connect(mapStateToProps)(Header); //creating a heigher order component using connect function
