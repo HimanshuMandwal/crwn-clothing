@@ -12,6 +12,11 @@ export const selectCartItems =  createSelector(
   (cart) =>  cart.cartItems//this will return the value that we want out of this selector
 ); //this is memoized selector
 
+export const selectCartHidden = createSelector(
+  [selectCart],
+  (cart)=> cart.hidden
+)
+
 export const selectCartItemCount = createSelector(
   [selectCartItems],
   (cartItems) => cartItems.reduce((accumulatorQuantity, cartItem) => accumulatorQuantity+cartItem.quantity, 0),

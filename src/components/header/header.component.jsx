@@ -6,6 +6,9 @@ import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux' ; //Connect is a heigher order component
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const Header = ({currentUser ,hidden}) => (
    <div className ='header'>
@@ -29,9 +32,12 @@ const Header = ({currentUser ,hidden}) => (
    </div>
 );
 
-const mapStateToProps = ({user:{currentUser}, cart:{hidden}}) => ({ //after making this we automaticaly have currentUser in props of the function
-    currentUser,//this state here is top level reducer state and that is mapped to the prop currentUser
-    hidden
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 })
+//lastly we have used this createStructuredSelector to deal with multiple selector in a simple key value way
+//after making this we automaticaly have currentUser in props of the function
+//this state here is top level reducer state and that is mapped to the prop currentUser
 
 export default connect(mapStateToProps)(Header); //creating a heigher order component using connect function
