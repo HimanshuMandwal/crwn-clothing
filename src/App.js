@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.action'; // as this action is triggered using mapDispatchToProps
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+import Checkout from './pages/checkout/checkout.component';
 
 function hats() {
   return (
@@ -56,6 +57,7 @@ class App extends React.Component {
         <Route  path='/shop' component={ShopPage}/>
         <Route  path='/shop/hats' component= {hats}/>
         <Route  exact path='/sign-in' render={()=> this.props.currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage/>) }/>
+        <Route exact path='/checkout' component= {Checkout}/>
         </Switch>
       </div>
     );
