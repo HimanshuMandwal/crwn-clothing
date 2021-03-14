@@ -1,6 +1,5 @@
-import { act } from '@testing-library/react';
 import { cartActionType } from './cart.types';
-import { addItemToCart } from './cart.utils'
+import { addItemToCart , removeItemFromCart} from './cart.utils'
 
 const INITIAL_STATE = {
   hidden : true,
@@ -9,7 +8,7 @@ const INITIAL_STATE = {
 
 const cartReducer = ( state = INITIAL_STATE , action) => {
   switch (action.type) { //using switch as we can have multiple action in this user.reducer
-    case cartActionType.TOGGLE_CART_HIDDEN:
+    case (cartActionType.TOGGLE_CART_HIDDEN):
       return {
         ...state,
         hidden: !state.hidden,
@@ -23,6 +22,11 @@ const cartReducer = ( state = INITIAL_STATE , action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter( cartItem => cartItem.id != action.payload.id  ) //this will keep the items which returns true
+      }
+    case (cartActionType.REMOVE_ITEM):
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
       }
     default:
       return state;
