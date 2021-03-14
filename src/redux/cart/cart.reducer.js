@@ -1,3 +1,4 @@
+import { act } from '@testing-library/react';
 import { cartActionType } from './cart.types';
 import { addItemToCart } from './cart.utils'
 
@@ -17,6 +18,11 @@ const cartReducer = ( state = INITIAL_STATE , action) => {
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems , action.payload),
+      }
+    case (cartActionType.CLEAR_ITEM_FROM_CART):
+      return {
+        ...state,
+        cartItems: state.cartItems.filter( cartItem => cartItem.id != action.payload.id  ) //this will keep the items which returns true
       }
     default:
       return state;
