@@ -10,7 +10,7 @@ const selectCart = (state) => state.cart;
 export const selectCartItems = createSelector(
   [selectCart], // first argument is an array of input selector
   (cart) => cart.cartItems//this will return the value that we want out of this selector
-); //this is memoized selector
+); //this is memoized selector as we have used createSelector here
 
 export const selectCartHidden = createSelector(
   [selectCart],

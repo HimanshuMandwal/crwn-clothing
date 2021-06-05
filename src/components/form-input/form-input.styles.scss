@@ -2,7 +2,7 @@ $sub-color: grey;
 $main-color: black; //scss variable
 
 @mixin shrinkLabel { //this is used in scss to give this shrinkLable styling wherever we want to use in this scss file
-  top: -14px;
+  top: -14px;       // by just calling  @include shrinkLabel(); then the scss inside this shrinkLabel is pested there
   font-size: 12px;
   color: $main-color;
 }
